@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./index.css";
 
-const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+const colors = ["red", "blue", "green", "yellow", "purple", "orange", "black"];
 
 export default function ColorGuessingGame() {
   const [targetColor, setTargetColor] = useState(getRandomColor());
@@ -9,6 +9,7 @@ export default function ColorGuessingGame() {
   const [score, setScore] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [lastClickedColor, setLastClickedColor] = useState<string | null>(null);
+  const [gameStarted, setGameStarted] = useState(false);
 
   function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -16,6 +17,7 @@ export default function ColorGuessingGame() {
 
   function handleGuess(color: string) {
     setLastClickedColor(color);
+    setGameStarted(true);
     if (color === targetColor) {
       setMessage("Correct! 🎉");
       setScore(score + 1);
@@ -31,6 +33,7 @@ export default function ColorGuessingGame() {
     setMessage("Guess the correct color!");
     setIsCorrect(false);
     setLastClickedColor(null);
+    setGameStarted(false);
   }
 
   useEffect(() => {
@@ -57,12 +60,12 @@ export default function ColorGuessingGame() {
         data-testid="colorBox"
       />
       {/* Color Options */}
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-4 text-white font-semibold">
         {colors.map((color) => (
           <button
             type="button"
             key={color}
-            className={`w-16 h-16 rounded-lg border-2 border-black cursor-pointer transition-transform duration-200 hover:scale-110 hover:opacity-80 ${
+            className={`w-16 h-16 rounded-lg cursor-pointer transition-transform duration-200 hover:scale-110 hover:opacity-80 ${
               lastClickedColor === color ? "fade-out" : ""
             }`}
             style={{ backgroundColor: color }}
@@ -86,6 +89,12 @@ export default function ColorGuessingGame() {
       >
         New Game
       </button>
+      {/* Game Status */}
+      {gameStarted && (
+        <p className="text-xl font-semibold" data-testid="gameStatus">
+          {isCorrect ? "You guessed the correct color!" : "Keep trying!"}
+        </p>
+      )}
     </div>
   );
 }
