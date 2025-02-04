@@ -93,7 +93,7 @@ export default function ColorGuessingGame() {
       {gameStarted && (
         <p className="text-xl font-semibold" data-testid="gameStatus">
           {isCorrect
-            ? `You guessed the correct color ${targetColor}!`
+            ? `You guessed the correct color ${targetColor}! 🎉`
             : "Keep trying, it might be the next color!"}
         </p>
       )}
