@@ -83,7 +83,7 @@ Project Structure:
     ├── package.json
     ├── README.md
 
-Customization
+# Customization
 
 You can customize the game by modifying:
 
@@ -93,7 +93,7 @@ Animation duration: Adjust the setTimeout values for reset and fade-out effects.
 
 Styling: Modify index.css or apply additional Tailwind CSS classes.
 
-Contributing
+# Contributing
 
 Contributions are welcome! If you find any bugs or have feature suggestions, feel free to submit a pull request.
 
