@@ -20,7 +20,7 @@ export default function ColorGuessingGame() {
     setGameStarted(true);
     if (color === targetColor) {
       setMessage("Correct! 🎉");
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1); // used callback to update score correctly
       setIsCorrect(true);
       setTimeout(resetGame, 2000); // Automatically reset the game after 2 seconds
     } else {
@@ -34,6 +34,17 @@ export default function ColorGuessingGame() {
     setIsCorrect(false);
     setLastClickedColor(null);
     setGameStarted(false);
+  }
+
+  function handleReset() {
+    if (
+      window.confirm(
+        "Are you sure you want to reset the game? You will lose all progress."
+      )
+    ) {
+      resetGame();
+      setScore(0); // Reset the score
+    }
   }
 
   useEffect(() => {
@@ -82,10 +93,12 @@ export default function ColorGuessingGame() {
       </p>
       <button
         type="button"
-        className="px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 cursor-pointer"
-        onClick={resetGame}
+        className={`px-6 py-2 text-white font-semibold rounded-lg cursor-pointer ${
+          score === 0 ? "hidden" : "bg-gray-800 hover:bg-gray-600"
+        }`}
+        onClick={handleReset}
+        disabled={score === 0}
         data-testid="newGameButton"
-        disabled={!isCorrect}
       >
         New Game
       </button>
