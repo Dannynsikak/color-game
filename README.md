@@ -50,15 +50,11 @@ Install dependencies:
 
     Start the development server:
 
-    yarn dev
-
-    # or
-
-    npm run dev
+    pnpm run dev
 
     Open your browser and go to:
 
-    http://localhost:3000
+    http://localhost:5173/
 
 # How to Play
 
