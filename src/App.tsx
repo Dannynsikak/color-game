@@ -46,7 +46,7 @@ export default function ColorGuessingGame() {
   }, [lastClickedColor, isCorrect]);
 
   return (
-    <div className="flex flex-col items-center p-6 space-y-4 bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center p-6 space-y-4 bg-gray-100 min-h-screen justify-center">
       <h1 className="text-2xl font-bold" data-testid="gameInstructions">
         {message}
       </h1>
@@ -92,7 +92,9 @@ export default function ColorGuessingGame() {
       {/* Game Status */}
       {gameStarted && (
         <p className="text-xl font-semibold" data-testid="gameStatus">
-          {isCorrect ? "You guessed the correct color!" : "Keep trying!"}
+          {isCorrect
+            ? `You guessed the correct color ${targetColor}!`
+            : "Keep trying, it might be the next color!"}
         </p>
       )}
     </div>
